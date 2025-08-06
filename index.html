@@ -64,7 +64,35 @@
             </a-camera>
         </a-entity>
   
+        <!-- astroid belt -->
+        <a-entity id="asteroid-orbit" position="0 1.25 -5"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 180000">
+        <a-entity id="asteroid-belt"></a-entity>
+        </a-entity>
 
+        <script>
+            const belt = document.querySelector('#asteroid-belt');
+            const numAsteroids = 1500;
+            const minRadius = 18;
+            const maxRadius = 24;
+      
+            for (let i = 0; i < numAsteroids; i++) {
+              const angle = Math.random() * Math.PI * 2;
+              const radius = minRadius + Math.random() * (maxRadius - minRadius);
+              const height = (Math.random() - 0.5) * 1.5;
+              const x = radius * Math.cos(angle);
+              const z = radius * Math.sin(angle);
+              const size = 0.02 + Math.random() * 0.05;
+              const color = `hsl(0, 0%, ${50 + Math.random() * 50}%)`;
+      
+              const asteroid = document.createElement('a-sphere');
+              asteroid.setAttribute('position', `${x} ${height} ${z}`);
+              asteroid.setAttribute('radius', size);
+              asteroid.setAttribute('color', color);
+              belt.appendChild(asteroid);
+            }
+          </script>
     </a-scene>
+
   </body>
 </html>
